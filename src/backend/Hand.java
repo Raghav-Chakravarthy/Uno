@@ -22,6 +22,10 @@ public class Hand {
 		return hand.remove(hand.indexOf(c));
 	}
 
+	public Card remove(int index){
+		return hand.remove(index);
+	}
+
 	public void print() {
 		for(Card p : hand)
 			System.out.println(p);
