@@ -1,3 +1,5 @@
+package frontend;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,17 +15,7 @@ public class FrontEndTest {
     private JButton btn = new JButton("Get ScreenSize for JComponents");
 
     public FrontEndTest() {
-        btn.setPreferredSize(new Dimension(400, 40));
-        btn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("JButton Size - " + btn.getSize());
-                System.out.println("JPanel Size - " + pnl.getSize());
-                System.out.println("JFrame Size - " + frm.getSize());
-            }
-        });
-        pnl.setPreferredSize(new Dimension(640, 480));
+        pnl.setPreferredSize(new Dimension(960, 600));
         pnl.add(btn, BorderLayout.SOUTH);
         frm.add(pnl, BorderLayout.CENTER);
         frm.setLocation(150, 100);
