@@ -1,6 +1,12 @@
 package backend;
 
 public class Player {
+    private Hand hand;
+
+    public Player(){
+        this.hand = new Hand(7);
+    }
+
     public void drawCard(Hand playerHand, boolean draw){
         if(draw)
             playerHand.addCard();
@@ -16,5 +22,9 @@ public class Player {
 
     public boolean win(Hand playerHand){
         return playerHand.size() == 0;
+    }
+
+    public Hand getHand(){
+        return this.hand;
     }
 }
