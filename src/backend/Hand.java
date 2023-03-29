@@ -41,7 +41,7 @@ public class Hand {
 
     public boolean contains(Card c1){
         for(Card c : hand){
-            if(c.getNum() == c1.getNum() && c.getColor().equals(c1.getColor())){
+            if(c.getNum() == c1.getNum() && c.getColorString().equals(c1.getColorString())){
                 return true;
             }
         }
