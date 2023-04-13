@@ -1,105 +1,72 @@
 package frontend;
 
-
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import javax.imageio.*;
-import java.io.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-public class Intro extends JPanel {
-
-    private Image image;
-
+public class Intro extends JPanel implements MouseListener {
+    private Image myImage;
+    
     public Intro() {
-        // Load the image from the file path
-//         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/red_button.png"));
-//         image = imageIcon.getImage();
-    	Image img = null;
-		try {
-			img = ImageIO.read(getClass().getResource("/green_button.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	ImageIcon icon = new ImageIcon(img);
-
-        setBackground(Color.RED);
-        setLayout(null);
-
-//        ImageIcon icon = new ImageIcon(getClass().getResource("/red_button.png"));
-        JButton button1 = new JButton(icon);
-        button1.setBounds(10, 482, 195, 75);
-        button1.addActionListener(new ButtonListener("2"));
-        add(button1);
-
-//        icon = new ImageIcon(getClass().getResource("/red_button.png"));
-        JButton button2 = new JButton(icon);
-        button2.setBounds(257, 482, 195, 75);
-        button2.addActionListener(new ButtonListener("3"));
-        add(button2);
-
-//        icon = new ImageIcon(getClass().getResource("/red_button.png"));
-        JButton button3 = new JButton(icon);
-        button3.setBounds(490, 482, 195, 75);
-        button3.addActionListener(new ButtonListener("4"));
-        add(button3);
-
-//        icon = new ImageIcon(getClass().getResource("/path/to/image4.png"));
-        JButton button4 = new JButton(icon);
-        button4.setBounds(740, 482, 195, 75);
-        button4.addActionListener(new ButtonListener("Tutorial"));
-        add(button4);
-        
-        JLabel logo = new JLabel("");
-		try {
-			img = ImageIO.read(getClass().getResource("/logo.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		icon = new ImageIcon(img);
-		logo.setIcon(icon);
-        logo.setBounds(0, 11, 960, 460);
-        add(logo);
+        myImage = loadImage();
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Draw the image on the panel
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(myImage, 0, 0, null);
+    }
+    
+    private Image loadImage() {
+        //loads the image
+        return new ImageIcon(getClass().getResource("/assets/Intro/intro.png")).getImage();
     }
 
-    private class ButtonListener implements ActionListener {
+    public void mouseMoved(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("Mouse moved at: (" + x + ", " + y + ")");
+    }
 
-        private String buttonName;
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
+    }
 
-        public ButtonListener(String buttonName) {
-            this.buttonName = buttonName;
-        }
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+    }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Button " + buttonName + " clicked");
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+    }
 
-            if (buttonName != "Tutorial") {
-                setPlayers(Integer.parseInt(buttonName));
-                changeView("game");
-            } else {
-                //slide show of all images
-            }
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+    }
 
-        }
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Intro");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(960, 600);
+        
+        Intro intro = new Intro();
+        frame.add(intro);
+        
+        frame.setVisible(true);
     }
 }
