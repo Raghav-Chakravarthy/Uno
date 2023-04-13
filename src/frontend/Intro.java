@@ -6,13 +6,14 @@ import javax.swing.*;
 
 public class Intro extends JPanel implements MouseListener {
     private Image myImage;
+    private final String path = "assets" + File.separator + "Intro" + File.separator;
     
     public Intro() {
         myImage = loadImage();
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(myImage, 0, 0, null);
@@ -20,7 +21,7 @@ public class Intro extends JPanel implements MouseListener {
     
     private Image loadImage() {
         //loads the image
-        return new ImageIcon(getClass().getResource("/assets/Intro/intro.png")).getImage();
+        return new ImageIcon(path+"intro.png").getImage();
     }
 
     public void mouseMoved(MouseEvent e) {
