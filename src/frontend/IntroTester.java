@@ -9,7 +9,7 @@ public class IntroTester {
     private Intro pnl = new Intro();
 
     public IntroTester() {
-        frm.setSize(960, 600);
+        frm.setSize(975, 635);
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frm.add(pnl, BorderLayout.CENTER);
         frm.setVisible(true);
