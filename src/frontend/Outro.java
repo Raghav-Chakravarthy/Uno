@@ -1,93 +1,62 @@
 package frontend;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.File;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-
-public class Outro extends JPanel {
-
-    private Image image;
-
+public class Outro extends JPanel implements MouseMotionListener {
+    private Image myImage;
+    private final String path = "assets" + File.separator + "outro" + File.separator;
+    public int x;
+    public int y;
+    
     public Outro() {
-        // Load the image from the file path
-//         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/red_button.png"));
-//         image = imageIcon.getImage();
-    	Image img = null;
-		try {
-			img = ImageIO.read(getClass().getResource("/green_button.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	ImageIcon icon = new ImageIcon(img);
-
-        setBackground(Color.RED);
-        setLayout(null);
-
-        JButton button4 = new JButton(icon);
-        button4.setBounds(740, 482, 195, 75);
-        button4.addActionListener(new ButtonListener("Home"));
-        add(button4);
-        
-        JLabel scoreText = new JLabel("");
-		try {
-			img = ImageIO.read(getClass().getResource("/yourScoreLabel.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		icon = new ImageIcon(img);
-		scoreText.setIcon(icon);
-        scoreText.setBounds(150, 49, 364, 50);
-        add(scoreText);
-        
-        JLabel score = new JLabel("##");
-        score.setForeground(Color.ORANGE);
-        score.setFont(new Font("Calibri", Font.BOLD, 60));
-        score.setBounds(524, 49, 122, 63);
-        add(score);
-        
-        JLabel leaderboard = new JLabel("");
-		try {
-			img = ImageIO.read(getClass().getResource("/leaderboard.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		icon = new ImageIcon(img);
-		leaderboard.setIcon(icon);
-        leaderboard.setBounds(32, 123, 667, 438);
-        add(leaderboard);
+        myImage = loadImage();
+        addMouseMotionListener(this);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Draw the image on the panel
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(myImage, 0, 0, null);
+    }
+    
+    private Image loadImage() {
+        Image img = null;
+        //test case
+        if ((x > 735 && x < 885) && (y > 520 && y < 580)) {
+            img = new ImageIcon(path+"outro_green.png").getImage();
+        }else {
+            img = new ImageIcon(path+"outro.png").getImage();
+        }
+        return img;
     }
 
-    private class ButtonListener implements ActionListener {
+    public void mouseMoved(MouseEvent e) {
+        x = e.getX();
+        y = e.getY();
 
-        private String buttonName;
+        //for finding bounds
+        System.out.println("Mouse At: (" + x + ", " + y + ")");
 
-        public ButtonListener(String buttonName) {
-            this.buttonName = buttonName;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Button " + buttonName + " clicked");
-        }
+        //reloads the image and repaints
+        myImage = loadImage();
+        repaint();
     }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {}
+
+    // public static void main(String[] args) {
+    //     JFrame frame = new JFrame("Intro");
+    //     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //     frame.setSize(975, 635);
+        
+    //     Intro intro = new Intro();
+    //     frame.add(intro);
+        
+    //     frame.setVisible(true);
+    // }
 }
-

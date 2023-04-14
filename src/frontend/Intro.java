@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Intro extends JPanel implements MouseMotionListener {
     private Image myImage;
-    private final String path = "assets" + File.separator + "Intro" + File.separator;
+    private final String path = "assets" + File.separator + "intro" + File.separator;
     public int x;
     public int y;
     
