@@ -6,19 +6,43 @@ import javax.swing.JPanel;
 import frontend.*;
 
 public class Uno {
-    private JFrame frame;
-    private JPanel intro, gamePanel, endPanel;
-    private String gameView;
-    private int numPlayers;
+    private static JFrame frame;
+    private static JPanel intro, gamePanel, endPanel;
+    private static String gameView;
+    private static int numPlayers;
     
 
     public Uno(){
         frame = new JFrame();
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(960,600));
-        frame.setContentPane(panel);
-        frame.pack();
+        intro = new Game();
+        gameView = "intro";
+        frame.setSize(new Dimension(975,635));
+        frame.setContentPane(intro);
+        frame.setResizable(false);
         frame.setVisible(true);
+    }
+
+    public String getGameView(){
+        return gameView;
+    }
+
+    public static void setPlayers(int x){
+        numPlayers = x;
+    }
+
+    public static void changeView(String view){
+        if(gameView.equals("intro")){
+            if(view.equals("game")){
+                gamePanel = new UnoView();
+                frame.remove(intro);
+                frame.setContentPane(gamePanel);
+            }
+        }
+        // "intro"
+        // "game"
+        // "end"
+        // "close"
+
     }
 
     public static void main(String[] args){
