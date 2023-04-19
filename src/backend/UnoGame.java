@@ -30,6 +30,10 @@ public class UnoGame {
         }
     }
 
+    public Player getPlayer(int i){
+        return players.get(i);
+    }
+
     private boolean finished(){
         for(Player p : players){
             if(p.win(p.getHand()))
