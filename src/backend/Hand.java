@@ -47,4 +47,8 @@ public class Hand {
         }
         return false;
     }
+
+	public ArrayList<Card> getHand(){
+		return this.hand;
+	}
 }

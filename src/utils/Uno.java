@@ -14,12 +14,13 @@ public class Uno {
 
     public Uno(){
         frame = new JFrame();
-        intro = new Game();
+        intro = new Intro();
         gameView = "intro";
         frame.setSize(new Dimension(975,635));
         frame.setContentPane(intro);
         frame.setResizable(false);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public String getGameView(){
@@ -30,12 +31,19 @@ public class Uno {
         numPlayers = x;
     }
 
+    public static int getNumPlayers(){
+        return numPlayers;
+    }
+
     public static void changeView(String view){
         if(gameView.equals("intro")){
             if(view.equals("game")){
-                gamePanel = new UnoView();
+                gamePanel = new Game();
+                System.out.println("Changing Views");
                 frame.remove(intro);
                 frame.setContentPane(gamePanel);
+                gamePanel.revalidate();
+                gamePanel.repaint();
             }
         }
         // "intro"
