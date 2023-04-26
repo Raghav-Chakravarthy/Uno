@@ -6,8 +6,7 @@ public class Card{
     public static final int PLUS_TWO = 10;
     public static final int PLUS_FOUR = 11;
     public static final int SKIP = 12;
-    public static final int REVERSE = 13;
-    public static final int WILD = 14;
+    public static final int WILD = 13;
     public static final int RED = 1;
     public static final int GREEN = 2;
     public static final int BLUE = 3;
@@ -23,7 +22,7 @@ public class Card{
     }
 
     public Card(){
-        this.num = (int) (Math.random() * 14) + 1;
+        this.num = (int) (Math.random() * 13) + 1;
         this.color = (int) (Math.random() * 4) + 1;
     }
 
@@ -41,30 +40,30 @@ public class Card{
 
     public String getColorString(){
         if(this.color == Card.RED)
-            return "Red";
+            return "red";
         else if(this.color == Card.GREEN)
-            return "Green";
+            return "green";
         else if(this.color == Card.BLUE)
-            return "Blue";
+            return "blue";
         else if(this.color == Card.YELLOW)
-            return "Yellow";
+            return "yellow";
         return null;
     }
 
     public String toString(){
         String ret = this.getColorString();
         if(this.num == Card.PLUS_TWO)
-            ret += " Plus Two";
+            return "plustwo_"+this.getColorString();
         else if(this.num == Card.PLUS_FOUR)
-            ret += " Plus Four";
+            return "plusfour";
         else if(this.num == Card.SKIP)
-            ret += " Skip";
-        else if(this.num == Card.REVERSE)
-            ret += " Reverse";
+            return "stop_" + this.getColorString();
+        /*else if(this.num == Card.REVERSE)
+            ret += " Reverse";*/
         else if(this.num == Card.WILD)
-            ret += " Wild";
+            return "wildcard";
         else if (this.num > 0 && this.num < 10)
-            ret += " " + this.getNum();
-        return ret;
+            return this.num + "_" + this.getColorString();
+        return null;
     }
 }

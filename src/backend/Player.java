@@ -4,7 +4,7 @@ public class Player {
     private Hand hand;
 
     public Player(){
-        this.hand = new Hand(7);
+        this.hand = new Hand(5);
     }
 
     public void drawCard(Hand playerHand, boolean draw){
@@ -26,5 +26,9 @@ public class Player {
 
     public Hand getHand(){
         return this.hand;
+    }
+
+    public boolean hasCard(Card c){
+        return this.hand.contains(c);
     }
 }
