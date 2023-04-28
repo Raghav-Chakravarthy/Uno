@@ -77,8 +77,13 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
             Image img = new ImageIcon(path+ playerHand.get(i).toString()+".png").getImage();
             //if mouse hovering
             g2d.drawImage(img, (i*90) + 4, 460, null);
-            System.out.println((x-4)/90);
         }
+        //getting card index and checking for valid cards
+        int cardIndex = (x-4)/90;
+        if (!(cardIndex >= playerHand.size())) {
+            System.out.println(playerHand.get(cardIndex));
+        }
+        
         
     }
 
