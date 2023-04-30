@@ -16,8 +16,13 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
     private Image bg = new ImageIcon("assets" + File.separator + "game" + File.separator + "gamescr.png").getImage();
     private UnoGame game = new UnoGame(Uno.getNumPlayers());
 
+    // (X, Y) Coordinates of last Mouseclick
     public int x;
     public int y;
+
+    // Integer holding the index of the card clicked, and -1 while not clicked yet
+    private int cardIndex = -1;
+    private boolean deckClicked = false, cardClicked = false; // Status of what the user has clicked
 
 
     //names of card files
@@ -29,16 +34,28 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
         addMouseListener(this);
         
         // Play the game while it is not finished
-        /*while(!game.finished()){
+        while(!game.finished()){
             for(int i = 0; i < Uno.getNumPlayers(); i++){
                 playerHand = game.getPlayer(0).getHand().getHand();
                 if(i == 0){
+                    while(!deckClicked && !cardClicked){ // Waiting for the user to make a move
+                        
+                    }
 
-                } else{
+                    if(deckClicked){ // If the deck is clicked by the user
+                        game.getPlayer(0).getHand().addCard(); // Add a random card from the deck to the user's hand
+                        repaint(); // Display new Hand
+                    } else if(cardClicked){
+                        if(cardIndex >= 0 && cardIndex < playerHand.size() && game.getCardPile().canPlace(playerHand.get(cardIndex))){
+                            game.playCard(0, playerHand.get(cardIndex));
+                        }
+                    }
+
+                } else {
 
                 }
             }
-        }*/
+        }
 
         //printing out hand with according file names for cards
         playerHand = game.getPlayer(0).getHand().getHand();
@@ -60,8 +77,13 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
             Image img = new ImageIcon(path+ playerHand.get(i).toString()+".png").getImage();
             //if mouse hovering
             g2d.drawImage(img, (i*90) + 4, 460, null);
-            System.out.println((x-4)/90);
         }
+        //getting card index and checking for valid cards
+        int cardIndex = (x-4)/90;
+        if (!(cardIndex >= playerHand.size())) {
+            System.out.println(playerHand.get(cardIndex));
+        }
+        
         
     }
 
@@ -74,6 +96,8 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
     public void mouseClicked(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+
+        //if(y>= 460 && y <= )
         repaint();
     }
 

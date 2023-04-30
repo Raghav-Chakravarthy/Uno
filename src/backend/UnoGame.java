@@ -41,4 +41,8 @@ public class UnoGame {
         }
         return false;
     }
+
+    public CardPile getCardPile(){
+        return this.pile;
+    }
 }
