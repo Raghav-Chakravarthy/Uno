@@ -7,7 +7,8 @@ import frontend.*;
 
 public class Uno {
     private static JFrame frame;
-    private static JPanel intro, gamePanel, endPanel;
+    private static JPanel intro, endPanel;
+    private static Game gamePanel;
     private static String gameView;
     private static int numPlayers;
     
@@ -41,9 +42,11 @@ public class Uno {
                 gamePanel = new Game();
                 System.out.println("Changing Views");
                 frame.remove(intro);
+                System.out.println("Removed Intro Panel");
                 frame.setContentPane(gamePanel);
                 gamePanel.revalidate();
                 gamePanel.repaint();
+                gamePanel.play();
             }
         }
         // "intro"
