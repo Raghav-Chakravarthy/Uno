@@ -51,7 +51,6 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println("In gameview paintcomponent");
         Graphics2D g2d = (Graphics2D) g;
         //drawing background image
         g2d.drawImage(bg, 0, 0, null);
@@ -61,26 +60,16 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
             Image img = new ImageIcon(path+ playerHand.get(i).toString()+".png").getImage();
             //if mouse hovering
             g2d.drawImage(img, (i*90) + 4, 460, null);
-        }
-        //getting card index and checking for valid cards
-        int cardIndex = (x-4)/90;
-        if (!(cardIndex >= playerHand.size()) && y >= 460 && y < 580) {
-            System.out.println(playerHand.get(cardIndex));
-        }
-        
-        
+        }  
     }
 
     public void play() {
-
         playRound();
     }
 
     public void playRound(){
         playerIndex = 0;
     }
-
-    
 
     public void mouseMoved(MouseEvent e) {}
 
@@ -93,28 +82,27 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
         y = e.getY();
         int cardIndex = (x-4)/90;
 
-        // If y inbounds for cards, and cardindex clicked is inbounds, and playable
-        if(y >= 460 && y < 580 && cardIndex < game.getPlayer(0).getHand().getHand().size() && game.getCardPile().canPlace(game.getPlayer(0).getHand().getHand().get(cardIndex))){
-            cardClicked = true;
-            this.cardIndex = cardIndex;
-
-        } else if(x >= 270 && x <= 355 && y >= 185 && y <= 260){
-            deckClicked = true;
-        }
+        System.out.println("Player Index: " + playerIndex);
 
         if (playerIndex == 0) {
-            if (cardClicked){
+            // If y inbounds for cards, and cardindex clicked is inbounds, and playable
+            if(y >= 460 && y < 580 && cardIndex < game.getPlayer(0).getHand().getHand().size() && game.getCardPile().canPlace(game.getPlayer(0).getHand().getHand().get(cardIndex))){
+                cardClicked = true;
+                this.cardIndex = cardIndex;
                 if(cardIndex >= 0 && cardIndex < playerHand.size() && game.getCardPile().canPlace(playerHand.get(cardIndex))){
+                    System.out.println("Played Card");
                     game.playCard(0, playerHand.get(cardIndex));
                 }
                 cardClicked = false;
-            } else if(deckClicked) {
+
+            } else if(x >= 270 && x <= 355 && y >= 185 && y <= 260){
+                deckClicked = true;
+                System.out.println("Drew Card");
                 game.getPlayer(0).getHand().addCard();
                 deckClicked = false;
-
-            }
-
+            }     
         }
+        
         playerHand = game.getPlayer(0).getHand().getHand();
         repaint();
     }
