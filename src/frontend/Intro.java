@@ -24,7 +24,7 @@ public class Intro extends JPanel implements MouseListener, MouseMotionListener 
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(myImage, 0, 0, null);
-        System.out.println("Repainted!");
+        // System.out.println("Repainted!");
     }
 
     private Image loadImage() {
@@ -50,7 +50,7 @@ public class Intro extends JPanel implements MouseListener, MouseMotionListener 
             y = e.getY();
             
             //for finding bounds
-            System.out.println("Mouse At: (" + x + ", " + y + ")");
+            // System.out.println("Mouse At: (" + x + ", " + y + ")");
 
             //reloads the image and repaints
             myImage = loadImage();

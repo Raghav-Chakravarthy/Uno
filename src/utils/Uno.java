@@ -38,6 +38,7 @@ public class Uno {
 
     public static void changeView(String view){
         if(gameView.equals("intro")){
+            System.out.println("Changing Views");
             if(view.equals("game")){
                 gamePanel = new Game();
                 System.out.println("Changing Views");
