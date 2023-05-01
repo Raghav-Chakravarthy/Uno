@@ -46,7 +46,7 @@ public class Uno {
                 frame.setContentPane(gamePanel);
                 gamePanel.revalidate();
                 gamePanel.repaint();
-                gamePanel.play();
+                //gamePanel.play();
             }
         }
         // "intro"

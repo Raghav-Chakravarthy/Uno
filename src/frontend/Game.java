@@ -32,6 +32,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
     public Game() {
         addMouseMotionListener(this);
         addMouseListener(this);
+        setFocusable(true);
         
         // Play the game while it is not finished
         
