@@ -19,6 +19,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
     // (X, Y) Coordinates of last Mouseclick
     public int x;
     public int y;
+    private boolean clicked = false;
 
     // Integer holding the index of the card clicked, and -1 while not clicked yet
     private int cardIndex = -1;
@@ -27,6 +28,9 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
 
     //names of card files
     ArrayList<Card> playerHand = new ArrayList<Card>();
+
+    //player
+    int playerIndex = 0;
 
     
     public Game() {
@@ -39,9 +43,9 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
 
         //printing out hand with according file names for cards
         playerHand = game.getPlayer(0).getHand().getHand();
-        for(Card c : playerHand){
-            System.out.println(c);
-        }
+        // for(Card c : playerHand){
+        //     System.out.println(c);
+        // }
     }
 
     @Override
@@ -67,31 +71,16 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
         
     }
 
-    public void play(){
-        while(!game.finished()){
-            for(int i = 0; i < Uno.getNumPlayers(); i++){
-                playerHand = game.getPlayer(0).getHand().getHand();
-                if(i == 0){
-                    while(!deckClicked && !cardClicked){ // Waiting for the user to make a move
-                        
-                    }
+    public void play() {
 
-                    if(deckClicked){ // If the deck is clicked by the user
-                        game.getPlayer(0).getHand().addCard(); // Add a random card from the deck to the user's hand
-                        //repaint(); // Display new Hand
-                    } else if(cardClicked){
-                        if(cardIndex >= 0 && cardIndex < playerHand.size() && game.getCardPile().canPlace(playerHand.get(cardIndex))){
-                            game.playCard(0, playerHand.get(cardIndex));
-                        }
-                    }
-
-                } else {
-
-                }
-            }
-        }
-        
+        playRound();
     }
+
+    public void playRound(){
+        playerIndex = 0;
+    }
+
+    
 
     public void mouseMoved(MouseEvent e) {}
 
@@ -108,9 +97,25 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener{
         if(y >= 460 && y < 580 && cardIndex < game.getPlayer(0).getHand().getHand().size() && game.getCardPile().canPlace(game.getPlayer(0).getHand().getHand().get(cardIndex))){
             cardClicked = true;
             this.cardIndex = cardIndex;
+
         } else if(x >= 270 && x <= 355 && y >= 185 && y <= 260){
             deckClicked = true;
         }
+
+        if (playerIndex == 0) {
+            if (cardClicked){
+                if(cardIndex >= 0 && cardIndex < playerHand.size() && game.getCardPile().canPlace(playerHand.get(cardIndex))){
+                    game.playCard(0, playerHand.get(cardIndex));
+                }
+                cardClicked = false;
+            } else if(deckClicked) {
+                game.getPlayer(0).getHand().addCard();
+                deckClicked = false;
+
+            }
+
+        }
+        playerHand = game.getPlayer(0).getHand().getHand();
         repaint();
     }
 
