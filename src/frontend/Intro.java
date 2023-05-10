@@ -32,10 +32,6 @@ public class Intro extends JPanel implements MouseListener, MouseMotionListener 
         //test case
         if ((x > 75 && x < 225) && (y > 520 && y < 580)) {
             img = new ImageIcon(path+"intro_green.png").getImage();
-        }else if ((x > 285 && x < 435) && (y > 520 && y < 580)) {
-            img = new ImageIcon(path+"intro_blue.png").getImage();
-        } else if ((x > 503 && x < 653) && (y > 520 && y < 580)) {
-            img = new ImageIcon(path+"intro_red.png").getImage();
         }else if ((x > 715 && x < 865) && (y > 520 && y < 580)) {
             img = new ImageIcon(path+"intro_yellow.png").getImage();
         }else {
@@ -65,19 +61,11 @@ public class Intro extends JPanel implements MouseListener, MouseMotionListener 
     @Override
     public void mouseClicked(MouseEvent e) {
         if(!tutorial){
-            System.out.println("Tutorial If Statement");
             if ((e.getX() > 75 && e.getX() < 225) && (e.getY() > 520 && e.getY() < 580)) {
-                Uno.setPlayers(2);
-                Uno.changeView("game");
-            }else if ((e.getX()> 285 && e.getX() < 435) && (e.getY() > 520 && e.getY() < 580)) {
-                Uno.setPlayers(3);
-                Uno.changeView("game");
-            } else if ((e.getX() > 503 && e.getX() < 653) && (e.getY() > 520 && e.getY() < 580)) {
                 Uno.setPlayers(4);
                 Uno.changeView("game");
             }else if ((e.getX() > 715 && e.getX() < 865) && (e.getY() > 520 && e.getY() < 580)) {
                 tutorial = true;
-                System.out.println("Clicked");
                 myImage = new ImageIcon("assets" + File.separator + "intro" + File.separator +"tutorial.png").getImage();
                 repaint();
             }
