@@ -1,16 +1,21 @@
 package utils;
 
 import java.awt.Dimension;
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import frontend.*;
 
 public class Uno {
     private static JFrame frame;
-    private static JPanel intro, endPanel;
+    private static JPanel intro;
     private static Game gamePanel;
+    private static Outro endPanel;
     private static String gameView;
     private static int numPlayers;
+    private static boolean winStatus;
+    private static Thread t;
     
 
     public Uno(){
@@ -36,18 +41,42 @@ public class Uno {
         return numPlayers;
     }
 
+    public static void win(boolean b){
+        winStatus = b;
+    }
+
+    public static boolean getWin(){
+        return winStatus;
+    }
+
     public static void changeView(String view){
-        if(gameView.equals("intro")){
-            if(view.equals("game")){
-                gamePanel = new Game();
-                System.out.println("Changing Views");
-                frame.remove(intro);
-                System.out.println("Removed Intro Panel");
-                frame.setContentPane(gamePanel);
-                gamePanel.revalidate();
-                gamePanel.repaint();
-                gamePanel.play();
-            }
+        if(view.equals("game")){
+            gamePanel = new Game();
+            frame.remove(intro);
+            frame.setContentPane(gamePanel);
+            gamePanel.revalidate();
+            gamePanel.repaint();
+            t = new Thread(gamePanel);
+            t.start();
+        }
+        else if(view.equals("end")){
+            frame.remove(gamePanel);
+            gamePanel.removeAll();
+            gamePanel.hide();
+            endPanel = new Outro();
+            endPanel.setPreferredSize(new Dimension(960, 620));
+            System.out.println("Changing Views");
+            System.out.println("Removed Game Panel");
+            frame.add(endPanel);
+            /*frame.revalidate();
+            frame.repaint();*/
+            endPanel.revalidate();
+            endPanel.repaint();
+            /*t = new Thread(endPanel);
+            t.start();*/
+            System.out.println("Done");
+        } else if(view.equals("close")){
+            frame.dispose();
         }
         // "intro"
         // "game"
